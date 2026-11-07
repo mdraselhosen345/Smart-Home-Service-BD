@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "title": "PC Home Service",
+    "category": "Computer Repair",
+    "description": "Professional home service for desktop computers. We diagnose and repair hardware and software issues, install Windows, remove viruses, upgrade SSD/RAM, and optimize system performance.",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+    "icon": "FaDesktop",
+    "price": "Starting from ৳500",
+    "serviceTime": "30-90 Minutes",
+    "rating": 4.9,
+    "availability": "Available",
+    "buttonText": "Book Now"
+  },
+  {
+    "id": 2,
+    "title": "CCTV Home Service",
+    "category": "Security System",
+    "description": "Complete CCTV camera installation, DVR/NVR configuration, troubleshooting, maintenance, and remote monitoring setup at your home or office.",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=600",
+    "icon": "FaVideo",
+    "price": "Starting from ৳800",
+    "serviceTime": "1-2 Hours",
+    "rating": 4.8,
+    "availability": "Available",
+    "buttonText": "Book Now"
+  },
+  {
+    "id": 3,
+    "title": "Electrical Home Service",
+    "category": "Electrical Repair",
+    "description": "Expert electricians for switchboard repair, wiring, socket replacement, lighting installation, fan setup, and electrical fault troubleshooting.",
+    "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600",
+    "icon": "FaBolt",
+    "price": "Starting from ৳600",
+    "serviceTime": "30-120 Minutes",
+    "rating": 4.7,
+    "availability": "Available",
+    "buttonText": "Book Now"
+  },
+  {
+    "id": 4,
+    "title": "Glass Home Service",
+    "category": "Glass Installation",
+    "description": "Professional glass installation and repair for windows, doors, mirrors, partitions, and custom glass solutions with safe and reliable service.",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600",
+    "icon": "FaHouse",
+    "price": "Starting from ৳700",
+    "serviceTime": "1-3 Hours",
+    "rating": 4.8,
+    "availability": "Available",
+    "buttonText": "Book Now"
+  }
+]

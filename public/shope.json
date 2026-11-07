@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1,
+    "title": "Dell Inspiron Laptop",
+    "brand": "Dell",
+    "category": "Laptop",
+    "price": 65000,
+    "oldPrice": 70000,
+    "discount": 7,
+    "rating": 4.8,
+    "reviews": 128,
+    "stock": 15,
+    "sku": "DELL-LAP-001",
+    "favorite": false,
+    "inStock": true,
+    "thumbnail": "https://i.ibb.co/5g7Qv0V/laptop.jpg",
+    "images": [
+            "https://i.ibb.co/q5nM7N6/headphone.jpg",
+      "https://ibb.co.com/ynTskkLS",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b"
+
+    ],
+    "description": "Dell Inspiron laptop powered by Intel Core i5 processor with excellent performance for office work, programming, and multimedia.",
+    "features": [
+      "Intel Core i5 Processor",
+      "8GB DDR4 RAM",
+      "512GB NVMe SSD",
+      "15.6 Inch Full HD Display",
+      "Windows 11"
+    ],
+    "specifications": {
+      "Processor": "Intel Core i5",
+      "RAM": "8GB",
+      "Storage": "512GB SSD",
+      "Display": "15.6 Inch FHD",
+      "Battery": "6 Hours"
+    },
+    "warranty": "2 Years Brand Warranty",
+    "delivery": "Free Delivery",
+    "details": "Perfect laptop for students, developers and office users."
+  },
+  {
+    "id": 2,
+    "title": "Wireless Bluetooth Headphone",
+    "brand": "Sony",
+    "category": "Audio",
+    "price": 2500,
+    "oldPrice": 3200,
+    "discount": 22,
+    "rating": 4.7,
+    "reviews": 215,
+    "stock": 40,
+    "sku": "SONY-HP-002",
+    "favorite": false,
+    "inStock": true,
+    "thumbnail": "https://i.ibb.co/q5nM7N6/headphone.jpg",
+    "images": [
+      "https://i.ibb.co/q5nM7N6/headphone.jpg",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b"
+    ],
+    "description": "Wireless Bluetooth headphone with deep bass and long battery life.",
+    "features": [
+      "Bluetooth 5.3",
+      "30 Hours Battery",
+      "Noise Isolation",
+      "Fast Charging",
+      "Built-in Microphone"
+    ],
+    "specifications": {
+      "Connectivity": "Bluetooth",
+      "Battery": "30 Hours",
+      "Charging": "USB-C",
+      "Weight": "250g"
+    },
+    "warranty": "1 Year",
+    "delivery": "Free Delivery",
+    "details": "Premium headphone for music lovers."
+  },
+  {
+    "id": 3,
+    "title": "Smart Watch",
+    "brand": "Amazfit",
+    "category": "Wearable",
+    "price": 3200,
+    "oldPrice": 3900,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 175,
+    "stock": 30,
+    "sku": "WATCH-003",
+    "favorite": false,
+    "inStock": true,
+    "thumbnail": "https://i.ibb.co/tD6QvLX/smartwatch.jpg",
+    "images": [
+      "https://i.ibb.co/tD6QvLX/smartwatch.jpg",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+      "https://images.unsplash.com/photo-1510017803434-a899398421b3",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12"
+    ],
+    "description": "Stylish smartwatch with fitness tracking.",
+    "features": [
+      "Heart Rate Monitor",
+      "Sleep Tracking",
+      "Water Resistant",
+      "Fitness Modes",
+      "Bluetooth Calling"
+    ],
+    "specifications": {
+      "Display": "1.8 Inch",
+      "Battery": "7 Days",
+      "Waterproof": "IP68"
+    },
+    "warranty": "1 Year",
+    "delivery": "Inside Dhaka 24 Hours",
+    "details": "Fitness and health monitoring smartwatch."
+  },
+  {
+    "id": 4,
+    "title": "WiFi Router",
+    "brand": "TP-Link",
+    "category": "Networking",
+    "price": 1800,
+    "oldPrice": 2200,
+    "discount": 18,
+    "rating": 4.5,
+    "reviews": 89,
+    "stock": 50,
+    "sku": "TPLINK-004",
+    "favorite": false,
+    "inStock": true,
+    "thumbnail": "https://i.ibb.co/GcL8Jr6/router.jpg",
+    "images": [
+      "https://i.ibb.co/GcL8Jr6/router.jpg",
+      "https://images.unsplash.com/photo-1647427060118-4911c9821b82",
+      "https://images.unsplash.com/photo-1580894732444-8ecded7900cd",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
+    ],
+    "description": "Dual band router with high-speed internet support.",
+    "features": [
+      "Dual Band",
+      "300 Mbps",
+      "Easy Setup",
+      "Parental Control"
+    ],
+    "specifications": {
+      "Speed": "300Mbps",
+      "Band": "2.4GHz + 5GHz"
+    },
+    "warranty": "1 Year",
+    "delivery": "Free Delivery",
+    "details": "Reliable router for home and office."
+  },
+  {
+    "id": 5,
+    "title": "HP Laser Printer",
+    "brand": "HP",
+    "category": "Printer",
+    "price": 14500,
+    "oldPrice": 16000,
+    "discount": 9,
+    "rating": 4.9,
+    "reviews": 96,
+    "stock": 10,
+    "sku": "HP-005",
+    "favorite": false,
+    "inStock": true,
+    "thumbnail": "https://i.ibb.co/3dQx7rT/printer.jpg",
+    "images": [
+      "https://i.ibb.co/3dQx7rT/printer.jpg",
+      "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6",
+      "https://images.unsplash.com/photo-1611078489935-0cb964de46d6",
+      "https://images.unsplash.com/photo-1616587226960-4a03badbe8bf"
+    ],
+    "description": "Fast laser printer with wireless printing support.",
+    "features": [
+      "Wireless Printing",
+      "Fast Printing",
+      "Low Power Consumption"
+    ],
+    "specifications": {
+      "Type": "Laser",
+      "Color": "Black"
+    },
+    "warranty": "1 Year",
+    "delivery": "Free Delivery",
+    "details": "Best printer for office use."
+  }
+]
