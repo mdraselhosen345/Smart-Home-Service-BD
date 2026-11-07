@@ -12,7 +12,7 @@ const Shope = () => {
 
     // API থেকে Product Load
     useEffect(() => {
-        fetch('http://localhost:5000/api/products')
+        fetch(`${import.meta.env.VITE_API_URL}/products`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error('Product load failed');
