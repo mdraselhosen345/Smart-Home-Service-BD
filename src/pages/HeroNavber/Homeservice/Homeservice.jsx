@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import PCService from "../../../assets/ServiceBackground/PcService.png";
-import CCTVBac from "../../../assets/ServiceBackground/CCTVBAC.png";
+import CCTVBac from "../../../assets/ServiceBackground/CCTVBac.png";
 import Electronic from "../../../assets/ServiceBackground/ElectronicService.png";
 
 // card home service
