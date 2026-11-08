@@ -1,6 +1,6 @@
 import React from "react";
 import Complne from "../../../assets/complne.png";
-import online from "../../../assets/online-Service.png";
+import online from "../../../assets/online-service.png";
 import { Link } from "react-router";
 import {
   FaPhoneAlt,
