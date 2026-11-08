@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import PCService from "../../../assets/ServiceBackground/PcService.png"
-import CCTVBac from '../../../assets/ServiceBackground/CCTVBAC.png'
+import CCTVBac from '../../../assets/ServiceBackground/CCTVBac.png'
 import Electronic from '../../../assets/ServiceBackground/ElectronicService.png'
 const Banner = () => {
     return (
