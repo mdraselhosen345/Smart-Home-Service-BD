@@ -11,7 +11,7 @@ import Servecing from "../pages/HeroNavber/Servecing/Servecing";
 import Homeservice from "../pages/HeroNavber/Homeservice/Homeservice";
 
 import LaptopPc from "../pages/HeroNavber/Homeservice/Homecard/LaptopPc";
-import Glass from "../pages/HeroNavber/HomeService/Homecard/Glass";
+import Glass from "../pages/HeroNavber/Homeservice/Homecard/Glass";
 import Cctv from "../pages/HeroNavber/Homeservice/Homecard/Cctv";
 import Electronic from "../pages/HeroNavber/Homeservice/Homecard/Electronic";
 
