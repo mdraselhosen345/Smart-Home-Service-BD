@@ -12,8 +12,8 @@ import {
 import { ImFacebook2 } from "react-icons/im";
 
 const PHONE = "01782299570";
-const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61595514920705";
-const ADDRESS = "Khangan Bajar, Khagan, Birulia, Savar, Dhaka";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596307167530";
+const ADDRESS = "Khagan, Birulia, Savar, Dhaka";
 const DIRECTION_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   ADDRESS
 )}`;

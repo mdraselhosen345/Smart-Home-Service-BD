@@ -9,6 +9,10 @@ import {
     FaTruck,
     FaInfoCircle,
     FaCheckCircle,
+    FaTimes,
+    FaChevronLeft,
+    FaChevronRight,
+    FaSearchPlus,
 } from 'react-icons/fa';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/products`;
@@ -22,11 +26,26 @@ const INFO_ICONS = {
 
 const cardClass = 'rounded-3xl bg-white shadow-xl ring-1 ring-blue-100';
 
+// সব ছবির তালিকা (ডুপ্লিকেট বাদ দিয়ে)
+const getAllImages = (p) =>
+    p
+        ? [
+              ...new Set(
+                  [
+                      p.thumbnail,
+                      ...(Array.isArray(p.images) ? p.images : []),
+                      p.image,
+                  ].filter(Boolean)
+              ),
+          ]
+        : [];
+
 const Dettels = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
+    const [lightboxOpen, setLightboxOpen] = useState(false);
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -87,6 +106,37 @@ const Dettels = () => {
         return () => controller.abort();
     }, [id]);
 
+    // বড় ছবির popup: Esc দিয়ে বন্ধ, তীর চিহ্ন দিয়ে ছবি পরিবর্তন
+    useEffect(() => {
+        if (!lightboxOpen) return;
+
+        const list = getAllImages(product);
+
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') setLightboxOpen(false);
+            if (list.length > 1 && e.key === 'ArrowRight') {
+                setSelectedImage((cur) => {
+                    const i = Math.max(list.indexOf(cur), 0);
+                    return list[(i + 1) % list.length];
+                });
+            }
+            if (list.length > 1 && e.key === 'ArrowLeft') {
+                setSelectedImage((cur) => {
+                    const i = Math.max(list.indexOf(cur), 0);
+                    return list[(i - 1 + list.length) % list.length];
+                });
+            }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [lightboxOpen, product]);
+
     if (loading) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-sky-100 via-blue-50 to-white">
@@ -127,22 +177,28 @@ const Dettels = () => {
             ? product.specifications
             : {};
 
-    // সব ছবির তালিকা (ডুপ্লিকেট বাদ দিয়ে)
-    const allImages = [
-        ...new Set(
-            [
-                product.thumbnail,
-                ...(Array.isArray(product.images) ? product.images : []),
-                product.image,
-            ].filter(Boolean)
-        ),
-    ];
+    const allImages = getAllImages(product);
+    const currentIndex = Math.max(allImages.indexOf(selectedImage), 0);
+
+    const showPrev = () =>
+        setSelectedImage(
+            allImages[(currentIndex - 1 + allImages.length) % allImages.length]
+        );
+    const showNext = () =>
+        setSelectedImage(allImages[(currentIndex + 1) % allImages.length]);
 
     const productName = product.title || product.name || 'Product';
 
     const stockNumber = Number(product.stock);
     const stockKnown = product.stock != null && !Number.isNaN(stockNumber);
     const inStock = stockKnown && stockNumber > 0;
+
+    // Key Features (খালি লাইন বাদ দিয়ে)
+    const featureList = Array.isArray(product.features)
+        ? product.features.filter(
+              (feature) => typeof feature === 'string' && feature.trim() !== ''
+          )
+        : [];
 
     const infoItems = [
         ['Warranty', product.warranty],
@@ -164,63 +220,77 @@ const Dettels = () => {
 
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                     {/* ---------- Left: Product Image ---------- */}
-{/* ---------- Left: Product Image ---------- */}
-<div className="self-start lg:sticky lg:top-6">
-    {/* Main image */}
-    <div className="group relative aspect-square overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-blue-100">
-        {selectedImage ? (
-            <img
-                src={selectedImage}
-                alt={productName}
-                referrerPolicy="no-referrer"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-        ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-sky-100 to-blue-50">
-                <p className="text-gray-500">কোনো Product Image নেই</p>
-            </div>
-        )}
+                    <div className="self-start lg:sticky lg:top-6">
+                        {/* Main image */}
+                        <div
+                            className={`group relative aspect-square overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-blue-100 ${
+                                selectedImage ? 'cursor-zoom-in' : ''
+                            }`}
+                            onClick={() => selectedImage && setLightboxOpen(true)}
+                        >
+                            {selectedImage && (
+                                <span className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur">
+                                    <FaSearchPlus />
+                                </span>
+                            )}
 
-        {/* Discount badge */}
-        {selectedImage && product.discount != null && (
-            <span className="absolute left-4 top-4 rounded-full bg-red-500 px-3 py-1 text-sm font-bold text-white shadow-lg">
-                {product.discount}% OFF
-            </span>
-        )}
+                            {selectedImage ? (
+                                <img
+                                    src={selectedImage}
+                                    alt={productName}
+                                    referrerPolicy="no-referrer"
+                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
+                            ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-sky-100 to-blue-50">
+                                    <p className="text-gray-500">
+                                        কোনো Product Image নেই
+                                    </p>
+                                </div>
+                            )}
 
-        {/* Image counter */}
-        {allImages.length > 1 && (
-            <span className="absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
-                {Math.max(allImages.indexOf(selectedImage), 0) + 1} / {allImages.length}
-            </span>
-        )}
-    </div>
+                            {/* Discount badge */}
+                            {selectedImage && product.discount != null && (
+                                <span className="absolute left-4 top-4 rounded-full bg-red-500 px-3 py-1 text-sm font-bold text-white shadow-lg">
+                                    {product.discount}% OFF
+                                </span>
+                            )}
 
-    {/* Small Image Gallery */}
-    {allImages.length > 1 && (
-        <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-            {allImages.map((img, index) => (
-                <button
-                    key={index}
-                    type="button"
-                    onClick={() => setSelectedImage(img)}
-                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-xl shadow-md transition hover:-translate-y-1 hover:shadow-lg ${
-                        selectedImage === img
-                            ? 'ring-4 ring-blue-600'
-                            : 'opacity-70 ring-1 ring-blue-100 hover:opacity-100'
-                    }`}
-                >
-                    <img
-                        src={img}
-                        alt={`${productName} ${index + 1}`}
-                        referrerPolicy="no-referrer"
-                        className="h-full w-full object-cover"
-                    />
-                </button>
-            ))}
-        </div>
-    )}
-</div>
+                            {/* Image counter */}
+                            {allImages.length > 1 && (
+                                <span className="absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+                                    {Math.max(allImages.indexOf(selectedImage), 0) + 1} /{' '}
+                                    {allImages.length}
+                                </span>
+                            )}
+                        </div>
+
+                        {/* Small Image Gallery */}
+                        {allImages.length > 1 && (
+                            <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+                                {allImages.map((img, index) => (
+                                    <button
+                                        key={index}
+                                        type="button"
+                                        onClick={() => setSelectedImage(img)}
+                                        className={`h-20 w-20 shrink-0 overflow-hidden rounded-xl shadow-md transition hover:-translate-y-1 hover:shadow-lg ${
+                                            selectedImage === img
+                                                ? 'ring-4 ring-blue-600'
+                                                : 'opacity-70 ring-1 ring-blue-100 hover:opacity-100'
+                                        }`}
+                                    >
+                                        <img
+                                            src={img}
+                                            alt={`${productName} ${index + 1}`}
+                                            referrerPolicy="no-referrer"
+                                            className="h-full w-full object-cover"
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
                     {/* ---------- Right: Product Information ---------- */}
                     <div className={`${cardClass} space-y-5 p-6 md:p-8`}>
                         <h1 className="text-2xl font-bold leading-snug text-[#0f1f4b] md:text-3xl">
@@ -290,24 +360,26 @@ const Dettels = () => {
                             </p>
                         )}
 
-                        {Array.isArray(product.features) &&
-                            product.features.length > 0 && (
-                                <div className="flex flex-wrap gap-2">
-                                    {product.features.map((feature, index) => (
-                                        <span
-                                            key={index}
-                                            className="rounded-lg bg-teal-50 px-3 py-1.5 text-sm text-teal-800 ring-1 ring-teal-100"
-                                        >
-                                            {feature}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+                        {/* ---------- Key Features ---------- */}
+                        {featureList.length > 0 && (
+                            <div className="rounded-2xl bg-teal-50/60 p-5 ring-1 ring-teal-100">
+                                <h2 className="text-lg font-bold text-[#0f1f4b]">
+                                    Key Features
+                                </h2>
+                                <div className="mt-2 h-1 w-12 rounded-full bg-gradient-to-r from-blue-800 to-blue-500" />
 
-                        {product.description && (
-                            <p className="leading-relaxed text-gray-600">
-                                {product.description}
-                            </p>
+                                <ul className="mt-4 space-y-2">
+                                    {featureList.map((feature, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-start gap-2 text-gray-700"
+                                        >
+                                            <FaCheckCircle className="mt-1 shrink-0 text-teal-600" />
+                                            <span className="break-words">{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         )}
 
                         <div className="flex flex-col gap-3 pt-2 sm:flex-row">
@@ -409,6 +481,88 @@ const Dettels = () => {
                     </div>
                 </div>
             </div>
+
+            {/* ---------- Big Image Popup (Lightbox) ---------- */}
+            {lightboxOpen && allImages.length > 0 && (
+                <div
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4"
+                    onClick={() => setLightboxOpen(false)}
+                >
+                    <button
+                        type="button"
+                        onClick={() => setLightboxOpen(false)}
+                        className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-xl text-white transition hover:bg-white/30"
+                        aria-label="Close"
+                    >
+                        <FaTimes />
+                    </button>
+
+                    <div
+                        className="relative flex w-full max-w-5xl items-center justify-center"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {allImages.length > 1 && (
+                            <button
+                                type="button"
+                                onClick={showPrev}
+                                className="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur transition hover:bg-white/40"
+                                aria-label="Previous image"
+                            >
+                                <FaChevronLeft />
+                            </button>
+                        )}
+
+                        <img
+                            src={selectedImage}
+                            alt={productName}
+                            referrerPolicy="no-referrer"
+                            className="max-h-[75vh] w-full rounded-2xl object-contain"
+                        />
+
+                        {allImages.length > 1 && (
+                            <button
+                                type="button"
+                                onClick={showNext}
+                                className="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur transition hover:bg-white/40"
+                                aria-label="Next image"
+                            >
+                                <FaChevronRight />
+                            </button>
+                        )}
+                    </div>
+
+                    {allImages.length > 1 && (
+                        <div
+                            className="mt-5 flex justify-center gap-3"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {allImages.map((img, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    onClick={() => setSelectedImage(img)}
+                                    className={`h-20 w-20 overflow-hidden rounded-xl transition ${
+                                        selectedImage === img
+                                            ? 'ring-4 ring-white'
+                                            : 'opacity-60 ring-1 ring-white/40 hover:opacity-100'
+                                    }`}
+                                >
+                                    <img
+                                        src={img}
+                                        alt={`${productName} ${index + 1}`}
+                                        referrerPolicy="no-referrer"
+                                        className="h-full w-full object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                    )}
+
+                    <p className="mt-3 text-sm text-white/70">
+                        {currentIndex + 1} / {allImages.length}
+                    </p>
+                </div>
+            )}
         </div>
     );
 };

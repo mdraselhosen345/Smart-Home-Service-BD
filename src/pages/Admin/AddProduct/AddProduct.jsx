@@ -8,6 +8,7 @@ const emptyProduct = {
   price: "",
   oldPrice: "",
   image: "",
+  features: "",
   description: "",
   stock: "",
 };
@@ -42,6 +43,12 @@ const AddProduct = () => {
 
       const imageUrl = product.image.trim();
 
+      // প্রতিটি লাইন = একটি feature
+      const featuresArray = product.features
+        .split("\n")
+        .map((feature) => feature.trim())
+        .filter(Boolean);
+
       const newProduct = {
         title: product.name.trim(),
         category: product.category,
@@ -49,6 +56,7 @@ const AddProduct = () => {
         oldPrice: Number(product.oldPrice || 0),
         thumbnail: imageUrl,
         images: imageUrl ? [imageUrl] : [],
+        features: featuresArray,
         description: product.description.trim(),
         stock: Number(product.stock),
       };
@@ -229,6 +237,23 @@ const AddProduct = () => {
               />
             </div>
           )}
+
+          <div>
+            <label className="mb-2 block font-semibold">Key Features</label>
+            <textarea
+              name="features"
+              value={product.features}
+              onChange={handleChange}
+              placeholder={
+                "প্রতি লাইনে একটি feature লিখুন\nযেমন:\n1 Year Warranty\nFast Charging\nWaterproof"
+              }
+              rows="5"
+              className="w-full rounded-lg border p-3 outline-none focus:border-blue-500"
+            />
+            <p className="mt-1 text-sm text-gray-500">
+              প্রতিটি feature আলাদা লাইনে লিখুন (Enter চাপুন)।
+            </p>
+          </div>
 
           <div>
             <label className="mb-2 block font-semibold">
