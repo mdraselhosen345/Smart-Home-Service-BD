@@ -22,12 +22,12 @@ const CATEGORY_COLORS = [
 const Categroy = () => {
     // ক্যাটাগরি ডেটা লিস্ট
  const categories = [
-  { img: Computer,   title: "সার্ভিস বুক করুন" },
-  { img: Creativity, title: "সার্ভিস বুক করুন" },
-  { img: Earbuds,    title: "সার্ভিস বুক করুন" },
-  { img: Router,     title: "সার্ভিস বুক করুন" },
-  { img: Electronic, title: "সার্ভিস বুক করুন" },
-  { img: Charger,    title: "সার্ভিস বুক করুন" },
+  { img: Computer,   title: "বিস্তারিত দেখুন" },
+  { img: Creativity, title: "বিস্তারিত দেখুন" },
+  { img: Earbuds,    title: "বিস্তারিত দেখুন" },
+  { img: Router,     title: "বিস্তারিত দেখুন" },
+  { img: Electronic, title: "বিস্তারিত দেখুন" },
+  { img: Charger,    title: "বিস্তারিত দেখুন" },
 ];
 
     // সার্ভিস কার্ডের ডেটা
@@ -88,7 +88,7 @@ const Categroy = () => {
                                     <span className='text-sm sm:text-base'>{item.title}</span>
                                     <FaArrowRight
                                         className='transition-transform duration-300 group-hover:translate-x-1'
-                                        size={16}
+                                        size={12}
                                     />
                                 </div>
                             </Link>
