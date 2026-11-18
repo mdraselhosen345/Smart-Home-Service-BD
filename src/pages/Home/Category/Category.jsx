@@ -1,6 +1,11 @@
 import React from 'react';
 import { FaArrowRight } from "react-icons/fa";
+import Computer from "../../../assets/computer.png";
 import Router from "../../../assets/router.png";
+import Creativity from "../../../assets/creativity.png";
+import Earbuds from "../../../assets/earbuds.png";
+import Electronic from "../../../assets/electronic.png";
+import Charger from "../../../assets/charger.png";
 import { Link } from 'react-router';
 import HomeService from "../../../assets/HomeServiceImg/HomeService.png";
 import ServecingCenter from "../../../assets/HomeServiceImg/ServecingCenter.png";
@@ -16,10 +21,14 @@ const CATEGORY_COLORS = [
 
 const Categroy = () => {
     // ক্যাটাগরি ডেটা লিস্ট
-    const categories = Array(6).fill({
-        img: Router,
-        title: "সার্ভিস বুক করুন"
-    });
+ const categories = [
+  { img: Computer,   title: "সার্ভিস বুক করুন" },
+  { img: Creativity, title: "সার্ভিস বুক করুন" },
+  { img: Earbuds,    title: "সার্ভিস বুক করুন" },
+  { img: Router,     title: "সার্ভিস বুক করুন" },
+  { img: Electronic, title: "সার্ভিস বুক করুন" },
+  { img: Charger,    title: "সার্ভিস বুক করুন" },
+];
 
     // সার্ভিস কার্ডের ডেটা
     const services = [
